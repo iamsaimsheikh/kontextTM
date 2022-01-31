@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import Home from './screens/Home';
+import Bookdetail from './screens/Bookdetail';
+import ThemeContextProvider from './contexts/ThemeContext';
+import AuthContextProvider from './contexts/AuthContext';
+import BookContextProvider from './contexts/BookContext';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+
 
 function App() {
   return (
+    <Router>
+    <Switch>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    
+      <ThemeContextProvider>
+      <AuthContextProvider>
+      <BookContextProvider>
+      
+          <Route path="/" component={Home} exact/>
+          <Route path="/bookdetail/:id" exact component={Bookdetail} />
+       
+      </BookContextProvider>
+      </AuthContextProvider>
+      </ThemeContextProvider>
+      
     </div>
+    </Switch>
+    </Router>
   );
 }
 
